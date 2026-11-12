@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Товар — LUMIÈRE</title>
+<meta name="description" content="Подробное описание товара, состав, протокол применения и отзывы.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a href="index.html" class="logo">LUMI<span>ÈRE</span></a>
+    <nav class="nav-links">
+      <a href="index.html">Главная</a>
+      <a href="catalog.html" class="active">Каталог</a>
+      <a href="services.html">Услуги</a>
+      <a href="booking.html">Запись</a>
+      <a href="blog.html">Блог</a>
+      <a href="about.html">О специалисте</a>
+      <a href="consultation.html">Подбор ухода</a>
+    </nav>
+    <button class="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container">
+    <div class="breadcrumbs"><a href="index.html">Главная</a> / <a href="catalog.html">Каталог</a> / <span id="crumb">Товар</span></div>
+    <div class="product-detail" id="productDetail"></div>
+
+    <div class="tabs">
+      <button class="tab active" data-tab="tab-desc">Описание</button>
+      <button class="tab" data-tab="tab-comp">Состав</button>
+      <button class="tab" data-tab="tab-prot">Протокол применения</button>
+      <button class="tab" data-tab="tab-rev">Отзывы</button>
+      <button class="tab" data-tab="tab-serv">Рекомендуемые процедуры</button>
+    </div>
+
+    <div id="tab-desc" class="tab-content active">
+      <p id="descText"></p>
+      <p style="margin-top:1rem;color:var(--muted)">Подходит для ежедневного домашнего ухода. При чувствительной коже начинайте с 2–3 раз в неделю.</p>
+    </div>
+    <div id="tab-comp" class="tab-content">
+      <p>Активные компоненты и вспомогательные вещества указаны на упаковке. Полный состав доступен по запросу у косметолога.</p>
+    </div>
+    <div id="tab-prot" class="tab-content">
+      <ol style="padding-left:1.2rem;display:flex;flex-direction:column;gap:.5rem">
+        <li>Очистите кожу.</li>
+        <li>Нанесите средство на сухую кожу.</li>
+        <li>Распределите тонким слоем, избегая области вокруг глаз.</li>
+        <li>При необходимости используйте увлажняющий крем.</li>
+      </ol>
+    </div>
+    <div id="tab-rev" class="tab-content">
+      <div class="review"><div class="stars">★★★★★</div><p style="margin-top:.4rem"><strong>Анна</strong> — Отличное средство, кожа стала заметно ровнее за месяц.</p></div>
+      <div class="review"><div class="stars">★★★★☆</div><p style="margin-top:.4rem"><strong>Мария</strong> — Хорошо работает, но требует увлажнения сверху.</p></div>
+      <div class="review"><div class="stars">★★★★★</div><p style="margin-top:.4rem"><strong>Ольга</strong> — Косметолог рекомендовал, результатом довольна.</p></div>
+    </div>
+    <div id="tab-serv" class="tab-content">
+      <p style="margin-bottom:1rem">Эту позицию часто сочетают с процедурами кабинета:</p>
+      <div class="grid grid-3" id="recommendedServices"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div><div class="logo" style="color:#fff;margin-bottom:1rem">LUMI<span>ÈRE</span></div><p style="font-size:.9rem;color:#8a7d73">Профессиональная косметика и кабинет косметолога.</p></div>
+      <div><h4 style="color:#fff;margin-bottom:.8rem">Каталог</h4><p><a href="catalog.html">Все товары</a></p><p><a href="services.html">Услуги</a></p></div>
+      <div><h4 style="color:#fff;margin-bottom:.8rem">Запись</h4><p><a href="booking.html">В кабинет</a></p><p><a href="consultation.html">Онлайн-подбор</a></p></div>
+      <div><h4 style="color:#fff;margin-bottom:.8rem">Контакты</h4><p>+7 (999) 000-00-00</p><p>hello@lumiere.ru</p></div>
+    </div>
+    <div class="foot-bottom"><span>© 2025 LUMIÈRE</span><span>Политика конфиденциальности</span></div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(location.search);
+  const id = params.get('id') || 'p1';
+  const p = PRODUCTS.find(x => x.id === id) || PRODUCTS[0];
+  document.title = p.name + ' — LUMIÈRE';
+  const crumb = document.querySelector('#crumb');
+  if (crumb) crumb.textContent = p.name;
+  const detail = document.querySelector('#productDetail');
+  if (detail) detail.innerHTML = (
+    '<div class="product-gallery"><img src="'+p.img+'" alt="'+p.name+'"></div>' +
+    '<div><span class="brand">'+p.brand+'</span><h1 style="margin:.4rem 0 1rem">'+p.name+'</h1>' +
+    '<div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem">' +
+      '<span class="chip">'+p.skin+' кожа</span><span class="chip">'+p.concern+'</span><span class="chip">'+p.step+'</span>' +
+    '</div>' +
+    '<div class="stars" style="margin-bottom:1rem">★★★★★ '+p.rating+' · '+p.reviews+' отзывов</div>' +
+    '<p style="font-size:1.4rem;font-weight:700;margin-bottom:1.2rem">'+p.price+' ₽</p>' +
+    '<p style="color:var(--muted);margin-bottom:1.4rem">'+p.note+'. Активный компонент: '+p.active+'.</p>' +
+    '<div style="display:flex;gap:1rem;flex-wrap:wrap">' +
+      '<a href="consultation.html" class="btn">Купить после консультации</a>' +
+      '<a href="booking.html" class="btn btn-outline">Записаться на процедуру</a>' +
+    '</div></div>'
+  );
+  const desc = document.querySelector('#descText');
+  if (desc) desc.textContent = p.note + '. Профессиональное средство для этапа «' + p.step + '» при типе кожи «' + p.skin + '» и проблеме «' + p.concern + '».';
+  const rec = document.querySelector('#recommendedServices');
+  if (rec) rec.innerHTML = SERVICES.slice(0,3).map(s => (
+    '<a href="service.html?id='+s.id+'" class="card service-card">' +
+      '<div class="thumb"><img src="'+s.img+'" alt="'+s.name+'"></div>' +
+      '<div class="body"><h3>'+s.name+'</h3><span class="price">'+s.price+' ₽ · '+s.duration+'</span></div>' +
+    '</a>'
+  )).join('');
+});
+</script>
+</body>
+</html>

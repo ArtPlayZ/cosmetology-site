@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Статья — LUMIÈRE</title>
+<meta name="description" content="Статья о уходе за кожей от врача-косметолога.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a href="index.html" class="logo">LUMI<span>ÈRE</span></a>
+    <nav class="nav-links">
+      <a href="index.html">Главная</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="services.html">Услуги</a>
+      <a href="booking.html">Запись</a>
+      <a href="blog.html" class="active">Блог</a>
+      <a href="about.html">О специалисте</a>
+      <a href="consultation.html">Подбор ухода</a>
+    </nav>
+    <button class="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container" style="max-width:820px">
+    <div class="breadcrumbs"><a href="index.html">Главная</a> / <a href="blog.html">Блог</a> / <span id="crumb">Статья</span></div>
+    <article id="articleBody"></article>
+
+    <h2 style="margin-top:3rem">Товары из статьи</h2>
+    <div class="grid grid-3" style="margin-top:1.5rem" id="articleProducts"></div>
+
+    <div class="cta-band" style="margin-top:3rem">
+      <h2>Нужна персональная схема?</h2>
+      <p class="lead">Врач-косметолог составит уход под ваш тип кожи.</p>
+      <a href="consultation.html" class="btn">Пройти онлайн-подбор</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div><div class="logo" style="color:#fff;margin-bottom:1rem">LUMI<span>ÈRE</span></div><p style="font-size:.9rem;color:#8a7d73">Профессиональная косметика и кабинет косметолога.</p></div>
+      <div><h4 style="color:#fff;margin-bottom:.8rem">Каталог</h4><p><a href="catalog.html">Все товары</a></p><p><a href="services.html">Услуги</a></p></div>
+      <div><h4 style="color:#fff;margin-bottom:.8rem">Запись</h4><p><a href="booking.html">В кабинет</a></p><p><a href="consultation.html">Онлайн-подбор</a></p></div>
+      <div><h4 style="color:#fff;margin-bottom:.8rem">Контакты</h4><p>+7 (999) 000-00-00</p><p>hello@lumiere.ru</p></div>
+    </div>
+    <div class="foot-bottom"><span>© 2025 LUMIÈRE</span><span>Политика конфиденциальности</span></div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(location.search);
+  const id = params.get('id') || 'a1';
+  const a = ARTICLES.find(x => x.id === id) || ARTICLES[0];
+  document.title = a.title + ' — LUMIÈRE';
+  const crumb = document.querySelector('#crumb');
+  if (crumb) crumb.textContent = a.title;
+  const body = document.querySelector('#articleBody');
+  if (body) body.innerHTML = (
+    '<span style="font-size:.85rem;color:var(--muted)">'+a.date+'</span>' +
+    '<h1 style="margin:.6rem 0 1.5rem">'+a.title+'</h1>' +
+    '<img src="'+a.img+'" alt="'+a.title+'" style="border-radius:16px;margin-bottom:1.5rem">' +
+    '<p style="margin-bottom:1rem">'+a.excerpt+'. В этой статье разбираем этапы ухода и активные компоненты, которые действительно работают.</p>' +
+    '<p style="margin-bottom:1rem">Основные шаги: очищение, тонизирование, сыворотка с активом, увлажнение и защита СПФ. Важно вводить активы постепенно и следить за реакцией кожи.</p>' +
+    '<p>Если вы не уверены в выборе — запишитесь на онлайн-подбор: врач-косметолог составит индивидуальную схему.</p>'
+  );
+  const prods = document.querySelector('#articleProducts');
+  if (prods) prods.innerHTML = PRODUCTS.slice(0,3).map(p => (
+    '<a href="product.html?id='+p.id+'" class="card product-card">' +
+      '<div class="thumb"><img src="'+p.img+'" alt="'+p.name+'"></div>' +
+      '<div class="body"><span class="brand">'+p.brand+'</span><h3>'+p.name+'</h3><span class="price">'+p.price+' ₽</span></div>' +
+    '</a>'
+  )).join('');
+});
+</script>
+</body>
+</html>

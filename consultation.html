@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Онлайн-подбор ухода — LUMIÈRE</title>
+<meta name="description" content="Дистанционный подбор ухода: опишите проблему, прикрепите фото кожи — врач-косметолог ответит в течение 24 часов.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a href="index.html" class="logo">LUMI<span>ÈRE</span></a>
+    <nav class="nav-links">
+      <a href="index.html">Главная</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="services.html">Услуги</a>
+      <a href="booking.html">Запись</a>
+      <a href="blog.html">Блог</a>
+      <a href="about.html">О специалисте</a>
+      <a href="consultation.html" class="active">Подбор ухода</a>
+    </nav>
+    <button class="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container">
+    <div class="breadcrumbs"><a href="index.html">Главная</a> / Онлайн-подбор</div>
+    <div class="hero-grid" style="align-items:start">
+      <div>
+        <h1>Онлайн-подбор ухода</h1>
+        <p class="lead" style="margin:1.2rem 0 2rem">Заполните анкету и прикрепите фото кожи. Врач-косметолог составит персональную схему ухода и ответит на вопросы в течение 24 часов.</p>
+        <ul class="list-check">
+          <li>Бесплатно</li>
+          <li>Без обязательств</li>
+          <li>Рекомендации с ссылками на каталог</li>
+          <li>Возможность записаться на процедуру после</li>
+        </ul>
+      </div>
+      <form class="form" id="consultForm" enctype="multipart/form-data">
+        <div class="form-row">
+          <input type="text" name="name" placeholder="Ваше имя" required>
+          <input type="tel" name="phone" placeholder="Телефон" required>
+        </div>
+        <input type="email" name="email" placeholder="Email" required>
+        <select name="skin" required>
+          <option value="">Тип кожи</option>
+          <option>Сухая</option><option>Жирная</option><option>Комбинированная</option>
+          <option>Нормальная</option><option>Чувствительная</option>
+        </select>
+        <textarea name="problem" placeholder="Опишите проблему: акне, пигментация, сухость, возрастные изменения..." required></textarea>
+        <label style="font-size:.9rem;color:var(--muted)">Фото кожи (необязательно, до 5 МБ)
+          <input type="file" name="photo" accept="image/*" style="margin-top:.4rem;padding:.6rem;border:1.5px solid var(--line);border-radius:12px;width:100%">
+        </label>
+        <button type="submit" class="btn">Отправить заявку</button>
+        <p style="font-size:.85rem;color:var(--muted)">Нажимая кнопку, вы соглашаетесь с политикой обработки персональных данных.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div><div class="logo" style="color:#fff;margin-bottom:1rem">LUMI<span>ÈRE</span></div><p style="font-size:.9rem;color:#8a7d73">Профессиональная косметика и кабинет косметолога.</p></div>
+      <div><h4 style="color:#fff;margin-bottom:.8rem">Каталог</h4><p><a href="catalog.html">Все товары</a></p><p><a href="services.html">Услуги</a></p></div>
+      <div><h4 style="color:#fff;margin-bottom:.8rem">Запись</h4><p><a href="booking.html">В кабинет</a></p><p><a href="consultation.html">Онлайн-подбор</a></p></div>
+      <div><h4 style="color:#fff;margin-bottom:.8rem">Контакты</h4><p>+7 (999) 000-00-00</p><p>hello@lumiere.ru</p></div>
+    </div>
+    <div class="foot-bottom"><span>© 2025 LUMIÈRE</span><span>Политика конфиденциальности</span></div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

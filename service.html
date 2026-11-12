@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Процедура — LUMIÈRE</title>
+<meta name="description" content="Подробное описание процедуры: показания, этапы, фото до и после, рекомендуемый домашний уход.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a href="index.html" class="logo">LUMI<span>ÈRE</span></a>
+    <nav class="nav-links">
+      <a href="index.html">Главная</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="services.html" class="active">Услуги</a>
+      <a href="booking.html">Запись</a>
+      <a href="blog.html">Блог</a>
+      <a href="about.html">О специалисте</a>
+      <a href="consultation.html">Подбор ухода</a>
+    </nav>
+    <button class="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container">
+    <div class="breadcrumbs"><a href="index.html">Главная</a> / <a href="services.html">Услуги</a> / <span id="crumb">Процедура</span></div>
+    <div class="product-detail" id="serviceDetail"></div>
+
+    <div class="grid grid-3" style="margin-top:3rem">
+      <div class="card"><h3>Показания</h3><ul class="list-check"><li>Тусклая кожа</li><li>Расширенные поры</li><li>Пигментация</li></ul></div>
+      <div class="card"><h3>Этапы</h3><ul class="list-check"><li>Очищение и диагностика</li><li>Основной протокол</li><li>Успокаивающий уход</li></ul></div>
+      <div class="card"><h3>Результат</h3><ul class="list-check"><li>Ровный тон</li><li>Свежесть</li><li>Увлажнённость</li></ul></div>
+    </div>
+
+    <h2 style="margin-top:3rem">Фото до и после</h2>
+    <div class="grid grid-3" style="margin-top:1.5rem">
+      <div class="card" style="padding:0;overflow:hidden"><img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&q=80" alt="До процедуры"><div style="padding:1rem"><strong>До</strong></div></div>
+      <div class="card" style="padding:0;overflow:hidden"><img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=600&q=80" alt="После процедуры"><div style="padding:1rem"><strong>После</strong></div></div>
+      <div class="card" style="padding:0;overflow:hidden"><img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=600&q=80" alt="Результат"><div style="padding:1rem"><strong>Результат</strong></div></div>
+    </div>
+
+    <h2 style="margin-top:3rem">Рекомендуемый домашний уход</h2>
+    <div class="grid grid-4" style="margin-top:1.5rem" id="homeCare"></div>
+
+    <div class="cta-band" style="margin-top:3rem">
+      <h2>Готовы записаться?</h2>
+      <p class="lead">Выберите удобную дату и время — подтверждение придёт на почту.</p>
+      <a href="booking.html" class="btn">Записаться на процедуру</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div><div class="logo" style="color:#fff;margin-bottom:1rem">LUMI<span>ÈRE</span></div><p style="font-size:.9rem;color:#8a7d73">Профессиональная косметика и кабинет косметолога.</p></div>
+      <div><h4 style="color:#fff;margin-bottom:.8rem">Каталог</h4><p><a href="catalog.html">Все товары</a></p><p><a href="services.html">Услуги</a></p></div>
+      <div><h4 style="color:#fff;margin-bottom:.8rem">Запись</h4><p><a href="booking.html">В кабинет</a></p><p><a href="consultation.html">Онлайн-подбор</a></p></div>
+      <div><h4 style="color:#fff;margin-bottom:.8rem">Контакты</h4><p>+7 (999) 000-00-00</p><p>hello@lumiere.ru</p></div>
+    </div>
+    <div class="foot-bottom"><span>© 2025 LUMIÈRE</span><span>Политика конфиденциальности</span></div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(location.search);
+  const id = params.get('id') || 's1';
+  const s = SERVICES.find(x => x.id === id) || SERVICES[0];
+  document.title = s.name + ' — LUMIÈRE';
+  const crumb = document.querySelector('#crumb');
+  if (crumb) crumb.textContent = s.name;
+  const detail = document.querySelector('#serviceDetail');
+  if (detail) detail.innerHTML = (
+    '<div class="product-gallery"><img src="'+s.img+'" alt="'+s.name+'"></div>' +
+    '<div><h1>'+s.name+'</h1>' +
+    '<p style="font-size:1.4rem;font-weight:700;margin:1rem 0">'+s.price+' ₽ · '+s.duration+'</p>' +
+    '<p class="lead" style="margin-bottom:1.4rem">'+s.desc+'</p>' +
+    '<div style="display:flex;gap:1rem;flex-wrap:wrap">' +
+      '<a href="booking.html" class="btn">Записаться</a>' +
+      '<a href="consultation.html" class="btn btn-outline">Подобрать уход</a>' +
+    '</div></div>'
+  );
+  const homeCare = document.querySelector('#homeCare');
+  if (homeCare) homeCare.innerHTML = PRODUCTS.slice(0,4).map(p => (
+    '<a href="product.html?id='+p.id+'" class="card product-card">' +
+      '<div class="thumb"><img src="'+p.img+'" alt="'+p.name+'"></div>' +
+      '<div class="body"><span class="brand">'+p.brand+'</span><h3>'+p.name+'</h3><span class="price">'+p.price+' ₽</span></div>' +
+    '</a>'
+  )).join('');
+});
+</script>
+</body>
+</html>

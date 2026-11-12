@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Услуги кабинета косметолога — LUMIÈRE</title>
+<meta name="description" content="Прайс-лист процедур: чистка лица, пилинги, микротоки, карбокситерапия. Запись онлайн.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a href="index.html" class="logo">LUMI<span>ÈRE</span></a>
+    <nav class="nav-links">
+      <a href="index.html">Главная</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="services.html" class="active">Услуги</a>
+      <a href="booking.html">Запись</a>
+      <a href="blog.html">Блог</a>
+      <a href="about.html">О специалисте</a>
+      <a href="consultation.html">Подбор ухода</a>
+    </nav>
+    <button class="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container">
+    <div class="breadcrumbs"><a href="index.html">Главная</a> / Услуги</div>
+    <h1>Услуги кабинета</h1>
+    <p class="lead" style="margin-top:1rem;margin-bottom:2rem">Процедуры с доказанной эффективностью. К каждой — рекомендуемый домашний уход из каталога.</p>
+    <div class="grid grid-3" id="serviceGrid"></div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <h2>Прайс-лист</h2>
+    <table style="width:100%;border-collapse:collapse;margin-top:1.5rem">
+      <thead><tr style="border-bottom:2px solid var(--line);text-align:left"><th style="padding:.8rem 0">Процедура</th><th>Длительность</th><th style="text-align:right">Цена</th></tr></thead>
+      <tbody id="priceBody"></tbody>
+    </table>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div><div class="logo" style="color:#fff;margin-bottom:1rem">LUMI<span>ÈRE</span></div><p style="font-size:.9rem;color:#8a7d73">Профессиональная косметика и кабинет косметолога.</p></div>
+      <div><h4 style="color:#fff;margin-bottom:.8rem">Каталог</h4><p><a href="catalog.html">Все товары</a></p><p><a href="services.html">Услуги</a></p></div>
+      <div><h4 style="color:#fff;margin-bottom:.8rem">Запись</h4><p><a href="booking.html">В кабинет</a></p><p><a href="consultation.html">Онлайн-подбор</a></p></div>
+      <div><h4 style="color:#fff;margin-bottom:.8rem">Контакты</h4><p>+7 (999) 000-00-00</p><p>hello@lumiere.ru</p></div>
+    </div>
+    <div class="foot-bottom"><span>© 2025 LUMIÈRE</span><span>Политика конфиденциальности</span></div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const grid = document.querySelector('#serviceGrid');
+  if (grid) grid.innerHTML = SERVICES.map(s => (
+    '<a href="service.html?id='+s.id+'" class="card service-card">' +
+      '<div class="thumb"><img src="'+s.img+'" alt="'+s.name+'"></div>' +
+      '<div class="body"><h3>'+s.name+'</h3><p style="color:var(--muted);font-size:.9rem">'+s.desc+'</p>' +
+      '<span class="price">'+s.price+' ₽ · '+s.duration+'</span>' +
+      '<a href="booking.html" class="btn btn-sm" style="margin-top:.6rem">Записаться</a></div>' +
+    '</a>'
+  )).join('');
+  const body = document.querySelector('#priceBody');
+  if (body) body.innerHTML = SERVICES.map(s => (
+    '<tr style="border-bottom:1px solid var(--line)"><td style="padding:.9rem 0">'+s.name+'</td><td>'+s.duration+'</td><td style="text-align:right;font-weight:600">'+s.price+' ₽</td></tr>'
+  )).join('');
+});
+</script>
+</body>
+</html>

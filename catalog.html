@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Каталог профкосметики — LUMIÈRE</title>
+<meta name="description" content="Каталог профессиональной косметики с фильтрами по типу кожи, проблеме, бренду и этапу ухода.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a href="index.html" class="logo">LUMI<span>ÈRE</span></a>
+    <nav class="nav-links">
+      <a href="index.html">Главная</a>
+      <a href="catalog.html" class="active">Каталог</a>
+      <a href="services.html">Услуги</a>
+      <a href="booking.html">Запись</a>
+      <a href="blog.html">Блог</a>
+      <a href="about.html">О специалисте</a>
+      <a href="consultation.html">Подбор ухода</a>
+    </nav>
+    <button class="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container">
+    <div class="breadcrumbs"><a href="index.html">Главная</a> / Каталог</div>
+    <h1>Каталог профкосметики</h1>
+    <p class="lead" style="margin-top:1rem">Фильтруйте по типу кожи, проблеме, этапу ухода и активному компоненту. Для ряда позиций доступна покупка после консультации.</p>
+
+    <div class="filters" id="filters">
+      <button class="filter active" data-filter="all">Все</button>
+      <button class="filter" data-filter="жирная">Жирная кожа</button>
+      <button class="filter" data-filter="сухая">Сухая кожа</button>
+      <button class="filter" data-filter="чувствительная">Чувствительная</button>
+      <button class="filter" data-filter="нормальная">Нормальная</button>
+      <button class="filter" data-filter="акне">Акне</button>
+      <button class="filter" data-filter="возраст">Возрастные изменения</button>
+      <button class="filter" data-filter="сухость">Сухость</button>
+      <button class="filter" data-filter="покраснения">Покраснения</button>
+    </div>
+
+    <div class="grid grid-4" id="productGrid"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div><div class="logo" style="color:#fff;margin-bottom:1rem">LUMI<span>ÈRE</span></div><p style="font-size:.9rem;color:#8a7d73">Профессиональная косметика и кабинет косметолога.</p></div>
+      <div><h4 style="color:#fff;margin-bottom:.8rem">Каталог</h4><p><a href="catalog.html">Все товары</a></p><p><a href="services.html">Услуги</a></p></div>
+      <div><h4 style="color:#fff;margin-bottom:.8rem">Запись</h4><p><a href="booking.html">В кабинет</a></p><p><a href="consultation.html">Онлайн-подбор</a></p></div>
+      <div><h4 style="color:#fff;margin-bottom:.8rem">Контакты</h4><p>+7 (999) 000-00-00</p><p>hello@lumiere.ru</p></div>
+    </div>
+    <div class="foot-bottom"><span>© 2025 LUMIÈRE</span><span>Политика конфиденциальности</span></div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const grid = document.querySelector('#productGrid');
+  if (!grid) return;
+  const render = (list) => {
+    grid.innerHTML = list.map(p => (
+      '<a href="product.html?id='+p.id+'" class="card product-card" data-skin="'+p.skin+'" data-concern="'+p.concern+'" data-brand="'+p.brand+'">' +
+        '<div class="thumb"><img src="'+p.img+'" alt="'+p.name+'"></div>' +
+        '<div class="body"><span class="brand">'+p.brand+'</span><h3>'+p.name+'</h3>' +
+        '<span class="chip">'+p.skin+' кожа</span>' +
+        '<div style="display:flex;justify-content:space-between;align-items:center;margin-top:.6rem">' +
+        '<span class="price">'+p.price+' ₽</span><span class="stars">★ '+p.rating+'</span></div></div>' +
+      '</a>'
+    )).join('') || '<p>Ничего не найдено</p>';
+  };
+  render(PRODUCTS);
+  document.querySelectorAll('.filter').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const key = btn.dataset.filter;
+      const filtered = key === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.skin === key || p.concern === key || p.brand === key);
+      render(filtered);
+    });
+  });
+});
+</script>
+</body>
+</html>

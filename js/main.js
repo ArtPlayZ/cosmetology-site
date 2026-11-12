@@ -6,26 +6,26 @@ document.addEventListener('DOMContentLoaded', () => {
     burger.classList.toggle('active');
   });
 
-  const filters = document.querySelectorAll('.filter');
-  const productCards = document.querySelectorAll('[data-skin]');
-  filters.forEach(f => f.addEventListener('click', () => {
-    filters.forEach(x => x.classList.remove('active'));
-    f.classList.add('active');
-    const key = f.dataset.filter;
-    productCards.forEach(card => {
-      const match = key === 'all' || card.dataset.skin === key || card.dataset.concern === key || card.dataset.brand === key;
-      card.style.display = match ? '' : 'none';
-    });
-  }));
+  const filters = document.querySelectorAll('#filters .filter');
+  if (filters.length) {
+    filters.forEach(f => f.addEventListener('click', () => {
+      filters.forEach(x => x.classList.remove('active'));
+      f.classList.add('active');
+      const key = f.dataset.filter;
+      document.querySelectorAll('#productGrid .product-card').forEach(card => {
+        const match = key === 'all' || card.dataset.skin === key || card.dataset.concern === key;
+        card.style.display = match ? '' : 'none';
+      });
+    }));
+  }
 
   document.querySelectorAll('.tab').forEach(tab => {
     tab.addEventListener('click', () => {
       const parent = tab.closest('.tabs');
       parent.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
-      const card = tab.closest('.product-detail');
-      card.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-      const target = card.querySelector('#' + tab.dataset.tab);
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      const target = document.querySelector('#' + tab.dataset.tab);
       if (target) target.classList.add('active');
     });
   });
